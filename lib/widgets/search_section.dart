@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:perplexity_clone/services/chat_web_service.dart';
 import 'package:perplexity_clone/theme/app_colors.dart';
 import 'package:perplexity_clone/widgets/search_bar_button.dart';
 
-class SearchSection extends StatelessWidget {
+class SearchSection extends StatefulWidget {
   const SearchSection({super.key});
 
+  @override
+  State<SearchSection> createState() => _SearchSectionState();
+}
+
+class _SearchSectionState extends State<SearchSection> {
+  TextEditingController queryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,6 +42,7 @@ class SearchSection extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
+                  controller: queryController,
                   style: GoogleFonts.ibmPlexMono(fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'Ask anything...',
@@ -59,16 +67,22 @@ class SearchSection extends StatelessWidget {
                       label: 'Attach',
                     ),
                     const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: AppColors.submitButton,
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.background,
-                        size: 16,
+                    InkWell(
+                      borderRadius: BorderRadius.circular(40),
+                      onTap: () {
+                        ChatWebService().chat(queryController.text.trim());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.submitButton,
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: AppColors.background,
+                          size: 16,
+                        ),
                       ),
                     ),
                   ],
@@ -79,5 +93,11 @@ class SearchSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    queryController.dispose();
   }
 }
