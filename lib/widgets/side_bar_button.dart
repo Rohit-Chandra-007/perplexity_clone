@@ -24,7 +24,13 @@ class SideBarButton extends StatelessWidget {
         ),
         isCollasped
             ? SizedBox()
-            : Text(label, style: Theme.of(context).textTheme.labelMedium),
+            : Flexible(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.labelMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
       ],
     );
   }

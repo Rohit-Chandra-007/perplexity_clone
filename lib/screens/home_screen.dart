@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:perplexity_clone/services/chat_web_service.dart';
 import 'package:perplexity_clone/theme/app_colors.dart';
 import 'package:perplexity_clone/widgets/search_section.dart';
 import 'package:perplexity_clone/widgets/side_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ChatWebService().connect();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +77,15 @@ class HomeScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
-                          "English (India)",
+                          "Education",
+                          style: Theme.of(context).textTheme.labelSmall!
+                              .copyWith(color: AppColors.footerGrey),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          "English (English)",
                           style: Theme.of(context).textTheme.labelSmall!
                               .copyWith(color: AppColors.footerGrey),
                         ),

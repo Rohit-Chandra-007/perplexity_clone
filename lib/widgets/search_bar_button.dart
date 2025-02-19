@@ -26,10 +26,15 @@ class _SearchBarButtonState extends State<SearchBarButton> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(widget.icon, color: AppColors.iconGrey, size: 20),
             const SizedBox(width: 10),
-            Text(widget.label, style: TextStyle(color: AppColors.iconGrey)),
+            Text(
+              widget.label,
+              style: TextStyle(color: AppColors.iconGrey),
+              
+            ),
           ],
         ),
       ),
