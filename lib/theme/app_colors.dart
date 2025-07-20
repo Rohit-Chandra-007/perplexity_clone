@@ -14,4 +14,8 @@ class AppColors {
   static const submitButton = Color.fromRGBO(27, 185, 206, 1);
   static const whiteColor = Colors.white;
   static const transparent = Colors.transparent;
+  static const Color sidebarBackground = Color(0xFF101012);
+  static const Color accent = Colors.blue;
+  static const Color textPrimary = Colors.white;
+  static const Color textSecondary = Colors.grey;
 }

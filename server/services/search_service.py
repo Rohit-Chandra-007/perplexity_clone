@@ -11,6 +11,7 @@ class SearchService:
     def web_search(self, query: str):
         results = []
         response = tavily_client.search(query, max_results=10)
+        # print(response)
         search_results = response.get("results", [])
         for result in search_results:
             try:
@@ -26,4 +27,5 @@ class SearchService:
             except Exception as e:
                 print(f"Error processing URL {result.get('url')}: {e}")
                 continue
+            
         return results

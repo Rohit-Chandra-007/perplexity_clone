@@ -6,7 +6,7 @@ import numpy as np
 
 class SortSearchService:
     def __init__(self):
-        self.embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+        self.embedding_model = SentenceTransformer("all-mpnet-base-v2")
 
     def sort_source(self, query: str, search_result: List[dict]):
         relevent_docs = []

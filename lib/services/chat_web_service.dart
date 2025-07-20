@@ -22,20 +22,22 @@ class ChatWebService {
 
   Stream<Map<String, dynamic>> get searchResultStream =>
       _searchController.stream;
+
   Stream<Map<String, dynamic>> get contentStream => _contentController.stream;
 
+  /// Connect to the WebSocket server.
+  /// If the WebSocket is already connected, it will not connect again.
   void connect() {
     _webSocket = WebSocket(Uri.parse(_url));
     _webSocket!.messages.listen(
       (message) {
         try {
           final data = json.decode(message);
-          if(data['type'] == 'search_result') {
+          if (data['type'] == 'search_result') {
             _searchController.add(data);
           } else if (data['type'] == 'content') {
             _contentController.add(data);
           }
-          
         } catch (e) {
           if (kDebugMode) {
             print('Error decoding message: $e');
@@ -50,12 +52,19 @@ class ChatWebService {
     );
   }
 
+  /// Send a message to the WebSocket server.
+  /// If the WebSocket is not connected, it will not send the message.
+  /// If the message is empty, it will not send the message.
   void chat(String query) {
     if (_webSocket != null) {
-      print('Sending message: $query');
+      if (kDebugMode) {
+        print('Sending message: $query');
+      }
       _webSocket!.send(json.encode({'query': query}));
     } else {
-      print('WebSocket is not connected');
+      if (kDebugMode) {
+        print('WebSocket is not connected');
+      }
     }
   }
 }
