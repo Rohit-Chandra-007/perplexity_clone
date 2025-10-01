@@ -107,3 +107,4 @@ take_screenshots.md
 TROUBLESHOOTING.md
 screenshots/PLACEHOLDER.md
 SECURITY_SETUP.md
+lib/firebase_options.dart
