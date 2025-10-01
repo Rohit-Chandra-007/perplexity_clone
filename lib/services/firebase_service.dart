@@ -4,7 +4,7 @@ import '../firebase_options.dart';
 
 class FirebaseService {
   static bool _isInitialized = false;
-  static bool _isDemo = false; // Set to false when using real Firebase project
+  static bool _isDemo = true; // Set to false when using real Firebase project
 
   static bool get isInitialized => _isInitialized;
   static bool get isDemo => _isDemo;

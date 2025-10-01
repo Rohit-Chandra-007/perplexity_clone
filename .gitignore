@@ -74,6 +74,10 @@ firebase-debug.log
 firebase-debug.*.log
 .firebase/
 
+# Local Firebase config (contains real API keys)
+lib/firebase_options_local.dart
+server/.env.local
+
 # Screenshots should be included
 !screenshots/
 !screenshots/*.png
@@ -102,3 +106,4 @@ SCREENSHOT_GUIDE.md
 take_screenshots.md
 TROUBLESHOOTING.md
 screenshots/PLACEHOLDER.md
+SECURITY_SETUP.md

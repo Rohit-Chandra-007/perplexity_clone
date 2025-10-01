@@ -41,12 +41,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC14niAJbaXqX2TmIYMCVxeecdi2kSQp9o',
-    appId: '1:266303460572:web:3ac9855499f9bb5f7bd019',
-    messagingSenderId: '266303460572',
-    projectId: 'myreactapp-81c10',
-    authDomain: 'myreactapp-81c10.firebaseapp.com',
-    storageBucket: 'myreactapp-81c10.firebasestorage.app',
+    apiKey: 'demo-api-key-replace-with-real-in-production',
+    appId: '1:demo-project:web:demo-app-id',
+    messagingSenderId: 'demo-sender-id',
+    projectId: 'demo-perplexity-clone',
+    authDomain: 'demo-perplexity-clone.firebaseapp.com',
+    storageBucket: 'demo-perplexity-clone.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
