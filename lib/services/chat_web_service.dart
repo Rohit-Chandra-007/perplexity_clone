@@ -17,13 +17,16 @@ class ChatWebService {
   WebSocket? _webSocket;
   final String _url = 'ws://localhost:8000/ws/chat';
 
-  final _searchController = StreamController<Map<String, dynamic>>();
-  final _contentController = StreamController<Map<String, dynamic>>();
+  final _searchController = StreamController<Map<String, dynamic>>.broadcast();
+  final _contentController = StreamController<Map<String, dynamic>>.broadcast();
+  final _queryController = StreamController<String>.broadcast();
 
   Stream<Map<String, dynamic>> get searchResultStream =>
       _searchController.stream;
 
   Stream<Map<String, dynamic>> get contentStream => _contentController.stream;
+
+  Stream<String> get queryStream => _queryController.stream;
 
   /// Connect to the WebSocket server.
   /// If the WebSocket is already connected, it will not connect again.
@@ -60,6 +63,7 @@ class ChatWebService {
       if (kDebugMode) {
         print('Sending message: $query');
       }
+      _queryController.add(query);
       _webSocket!.send(json.encode({'query': query}));
     } else {
       if (kDebugMode) {

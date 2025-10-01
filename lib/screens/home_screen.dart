@@ -1,45 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:perplexity_clone/services/chat_web_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:perplexity_clone/theme/app_colors.dart';
+import 'package:perplexity_clone/widgets/connection_status.dart';
+import 'package:perplexity_clone/widgets/firebase_status.dart';
 import 'package:perplexity_clone/widgets/search_section.dart';
 import 'package:perplexity_clone/widgets/side_bar.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  String fullResponse = '';
-
-  @override
-  void initState() {
-    super.initState();
-    ChatWebService().connect();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Row(
         children: [
           // Side Navigation
-          SideBar(),
+          const SideBar(),
           Expanded(
             child: Column(
               children: [
-                Expanded(child: SearchSection()),
+                const ConnectionStatus(),
+                const FirebaseStatus(),
+                const Expanded(child: SearchSection()),
                 // footer
-
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Wrap(
                     alignment: WrapAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "Pro",
                           style: Theme.of(context).textTheme.labelSmall!
@@ -47,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "Enterprise",
                           style: Theme.of(context).textTheme.labelSmall!
@@ -55,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "Store",
                           style: Theme.of(context).textTheme.labelSmall!
@@ -63,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "Blog",
                           style: Theme.of(context).textTheme.labelSmall!
@@ -71,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "Careers",
                           style: Theme.of(context).textTheme.labelSmall!
@@ -79,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "Education",
                           style: Theme.of(context).textTheme.labelSmall!
@@ -87,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "English (English)",
                           style: Theme.of(context).textTheme.labelSmall!

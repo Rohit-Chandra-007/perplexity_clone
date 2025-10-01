@@ -9,6 +9,8 @@
 .buildlog/
 .history
 .svn/
+.vscode/
+.gemini/
 .swiftpm/
 migrate_working_dir/
 
@@ -17,11 +19,11 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
+.vscode/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -32,6 +34,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+
 
 # Symbolication related
 app.*.symbols
@@ -55,3 +58,47 @@ __pycache__/
 *$py.class
 .Python
 venv/
+GEMINI.md
+
+# Node.js (not needed for Flutter projects)
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Firebase
+firebase-debug.log
+firebase-debug.*.log
+.firebase/
+
+# Screenshots should be included
+!screenshots/
+!screenshots/*.png
+!screenshots/*.jpg
+!screenshots/*.md
+
+# Documentation should be included
+!FIREBASE_SETUP.md
+!FLUTTERFIRE_CLI_SETUP.md
+!FIRESTORE_SETUP.md
+!TROUBLESHOOTING.md
+!ASSET_FIXES.md
+!MANUAL_START.md
+!SCREENSHOT_GUIDE.md
+!start_dev.bat
+!start_dev.ps1
+
+# VS Code settings (optional)
+.vscode/launch.json
+ASSET_FIXES.md
+FIREBASE_SETUP.md
+FIRESTORE_SETUP.md
+FLUTTERFIRE_CLI_SETUP.md
+MANUAL_START.md
+SCREENSHOT_GUIDE.md
+take_screenshots.md
+TROUBLESHOOTING.md
+screenshots/PLACEHOLDER.md

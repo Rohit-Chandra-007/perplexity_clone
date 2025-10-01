@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:perplexity_clone/screens/history_screen.dart';
+import 'package:perplexity_clone/screens/home_screen.dart';
 import 'package:perplexity_clone/theme/app_colors.dart';
 import 'package:perplexity_clone/widgets/side_bar_button.dart';
 
@@ -37,6 +39,23 @@ class _SideBarState extends State<SideBar> {
                   isCollasped: _isCollasped,
                   label: "Home",
                   icon: Icons.add,
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    );
+                  },
+                ),
+                SideBarButton(
+                  isCollasped: _isCollasped,
+                  label: "History",
+                  icon: Icons.history,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HistoryScreen()),
+                    );
+                  },
                 ),
                 SideBarButton(
                   isCollasped: _isCollasped,

@@ -19,7 +19,8 @@ llm_service = LLMService()
 def read_root():
     return {"Hello": "World"}
 
-#REST API
+
+# REST API
 @app.post("/chat")
 def chat_endpoint(body: ChatBody):
     search_results = search_service.web_search(body.query)
@@ -34,26 +35,55 @@ def chat_endpoint(body: ChatBody):
 @app.websocket("/ws/chat")
 async def websocket_chat_endpoint(websocket: WebSocket):
     await websocket.accept()
+    print("WebSocket connection accepted")
 
     try:
-        await asyncio.sleep(0.1)
-        data = await websocket.receive_json()
-        query = data.get("query")
-
-        search_results = search_service.web_search(query)
-        sorted_results = sort_search_service.sort_source(query, search_results)
-        if not isinstance(sorted_results, list):
-            sorted_results = []
-        await asyncio.sleep(0.1)
-        await websocket.send_json({"type": "search_result", "data": sorted_results})
-        for chunk in llm_service.generate_response(query, sorted_results):
-            await asyncio.sleep(0.1)
-            await websocket.send_json({"type": "content", "data": chunk})
-    except:
-        print("Unexpected error occured")
-
+        while True:
+            # Wait for a message from the client
+            data = await websocket.receive_json()
+            query = data.get("query")
+            
+            if not query:
+                await websocket.send_json({"type": "error", "data": "No query provided"})
+                continue
+            
+            print(f"Received query: {query}")
+            
+            try:
+                # Perform web search
+                search_results = search_service.web_search(query)
+                sorted_results = sort_search_service.sort_source(query, search_results)
+                if not isinstance(sorted_results, list):
+                    sorted_results = []
+                
+                # Send search results
+                await websocket.send_json({"type": "search_result", "data": sorted_results})
+                print(f"Sent {len(sorted_results)} search results")
+                
+                # Generate and stream LLM response
+                response_count = 0
+                for chunk in llm_service.generate_response(query, sorted_results):
+                    await websocket.send_json({"type": "content", "data": chunk})
+                    response_count += 1
+                    await asyncio.sleep(0.05)  # Small delay to prevent overwhelming
+                
+                print(f"Sent {response_count} response chunks")
+                
+                # Send completion signal
+                await websocket.send_json({"type": "complete", "data": "Response completed"})
+                
+            except Exception as e:
+                print(f"Error processing query: {e}")
+                await websocket.send_json({"type": "error", "data": f"Error processing query: {str(e)}"})
+                
+    except Exception as e:
+        print(f"WebSocket error: {e}")
     finally:
-        await websocket.close()
+        print("WebSocket connection closed")
+        try:
+            await websocket.close()
+        except RuntimeError as e:
+            print(f"WebSocket already closed: {e}")
 
 
 if __name__ == "__main__":
